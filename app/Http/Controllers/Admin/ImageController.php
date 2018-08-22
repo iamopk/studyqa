@@ -27,7 +27,7 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.gallery.create');
     }
 
     /**
@@ -38,7 +38,19 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'file' => 'required|image|mimes:jpg,jpeg,png',
+        ]);
+
+        $path = $request->file('file')->store('images', 'public');
+
+        Image::create([
+            'name' => $request->name,
+            'url' => $path,
+        ]);
+
+        return redirect(route('admin.images'));
     }
 
     /**
@@ -49,6 +61,10 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image = Image::findOrFail($id);
+
+        $image->delete();
+
+        return redirect(route('admin.images'));
     }
 }

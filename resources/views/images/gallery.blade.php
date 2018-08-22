@@ -7,8 +7,12 @@
             <div class="gallery-row">
                 <div class="gallery-column">
                 @foreach($images as $image)
-                        <img class="gallery-image" src="{{$image->url}}" data-id="{{$image->id}}" alt="{{$image->name}}">
-                    @if($loop->iteration % 3 === 0 )
+                        @if(file_exists("storage/".$image->url))
+                            <img class="gallery-image" src="/storage/{{$image->url}}" data-id="{{$image->id}}" alt="{{$image->name}}"/>
+                        @else
+                            <img class="gallery-image" src="{{$image->url}}" data-id="{{$image->id}}" alt="{{$image->name}}"/>
+                        @endif
+                    @if($loop->iteration % 6 === 0 )
                         </div>
                         <div class="gallery-column">
                     @endif
@@ -28,7 +32,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <img id="gallery-modal-image" src="" alt="">
+            <img id="gallery-modal-image" src="" alt="" style="width: 100%;">
         </div>
     </div>
 </div>

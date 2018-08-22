@@ -14,7 +14,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        $images = Image::all();
+        $images = Image::query()->orderBy('id', 'desc')->get();
         return view('images.gallery', ['images' => $images]);
     }
 }
