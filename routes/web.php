@@ -27,6 +27,7 @@ Route::group([
 ], function (Router $router) {
     $router->get('/news', 'ArticleController@index')->name('admin.news');
     $router->get('/news/create', 'ArticleController@create')->name('admin.news.create');
+    $router->post('/news', 'ArticleController@store')->name('admin.news.store');
     $router->get('/news/edit/{id}', 'ArticleController@edit')->name('admin.news.edit');
     $router->get('/news/delete/{id}', 'ArticleController@destroy')->name('admin.news.destroy');
 });

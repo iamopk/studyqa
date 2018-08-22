@@ -15,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::query()->paginate(15);
+        $articles = Article::query()->orderBy('id', 'desc')->paginate(15);
 
         return view('admin.articles.index', ['articles' => $articles]);
     }
@@ -27,7 +27,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        dd('create');
+        return view('admin.articles.create');
     }
 
     /**
@@ -38,7 +38,21 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'file' => 'required|image|mimes:jpg,jpeg,png',
+            'body' => 'required',
+        ]);
+
+        $path = $request->file('file')->store('images', 'public');
+
+        Article::create([
+            'title' => $request->title,
+            'pic' => $path,
+            'body' => $request->body,
+        ]);
+
+        return redirect(route('admin.news'));
     }
 
     /**

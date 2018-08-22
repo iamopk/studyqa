@@ -65,6 +65,7 @@
             </div>
         </nav>
 
+        @include('admin.layouts.errors')
         <main class="py-4">
             @yield('content')
         </main>
