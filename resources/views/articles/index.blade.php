@@ -17,7 +17,6 @@
                         <a href="{{route('news.show', ['article'=>$article])}}">
                             <h5 class="card-title">{{$article->title}}</h5>
                         </a>
-                        <p class="card-text">{{ substr($article->body, 0, 50) }}...</p>
                     </div>
                 </div>
             @endforeach()

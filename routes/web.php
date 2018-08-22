@@ -13,7 +13,7 @@
 
 use Illuminate\Routing\Router;
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'PageController@index')->name('home');
 
 Auth::routes();
 
@@ -38,4 +38,8 @@ Route::group([
     $router->post('/images', 'ImageController@store')->name('admin.images.store');
     $router->get('/images/delete/{id}', 'ImageController@destroy')->name('admin.images.destroy');
 
+    $router->post('/ajax/upload/image', 'UploadController@image')->name('admin.ajax.upload.image');
+
+    $router->get('/page/edit/{id}', 'PageController@edit')->name('admin.page.edit');
+    $router->post('/page/edit/{id}', 'PageController@update')->name('admin.page.update');
 });

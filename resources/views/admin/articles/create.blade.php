@@ -16,7 +16,7 @@
                 </div>
                 <div class="form-group">
                     <label for="bodyFormControl">Текст</label>
-                    <textarea class="form-control" required name="body" id="bodyFormControl" rows="3">{{old('body')}}</textarea>
+                    <textarea class="form-control summernote" required name="body" id="bodyFormControl" data-image-url="{{ route('admin.ajax.upload.image') }}" rows="3">{{old('body')}}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary mb-2">Создать</button>
             </form>
