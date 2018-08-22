@@ -18,6 +18,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/news', 'ArticleController@index')->name('news');
+Route::get('/gallery', 'ImageController@index')->name('gallery');
 Route::get('/news/{article}', 'ArticleController@show')->name('news.show');
 
 Route::group([
@@ -31,4 +32,10 @@ Route::group([
     $router->get('/news/edit/{id}', 'ArticleController@edit')->name('admin.news.edit');
     $router->post('/news/update/{id}', 'ArticleController@update')->name('admin.news.update');
     $router->get('/news/delete/{id}', 'ArticleController@destroy')->name('admin.news.destroy');
+
+    $router->get('/images', 'ImageController@index')->name('admin.images');
+    $router->get('/images/create', 'ImageController@create')->name('admin.images.create');
+    $router->post('/images', 'ImageController@store')->name('admin.images.store');
+    $router->get('/images/delete/{id}', 'ImageController@destroy')->name('admin.images.destroy');
+
 });

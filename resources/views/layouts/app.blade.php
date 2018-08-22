@@ -43,6 +43,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('news') }}">Новости</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('gallery') }}">Галлерея</a>
+                        </li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
