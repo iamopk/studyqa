@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.34 on 2018-08-22 07:17:13.
+ * Generated for Laravel 5.6.34 on 2018-08-22 14:36:29.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -13060,6 +13060,38 @@ namespace Barryvdh\Debugbar {
  
 }
 
+namespace Mews\Purifier\Facades { 
+
+    class Purifier {
+        
+        /**
+         * 
+         *
+         * @param $dirty
+         * @param null $config
+         * @return mixed 
+         * @static 
+         */ 
+        public static function clean($dirty, $config = null)
+        {
+            return \Mews\Purifier\Purifier::clean($dirty, $config);
+        }
+        
+        /**
+         * Get HTMLPurifier instance.
+         *
+         * @return \HTMLPurifier 
+         * @static 
+         */ 
+        public static function getInstance()
+        {
+            return \Mews\Purifier\Purifier::getInstance();
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -15405,6 +15437,8 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
+
+    class Purifier extends \Mews\Purifier\Facades\Purifier {}
  
 }
 
