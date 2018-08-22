@@ -41,6 +41,9 @@
                             <a class="nav-link" href="{{ route('news') }}">На сайт</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.news') }}">Новости</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.news.create') }}">Создать новость</a>
                         </li>
                         <li class="nav-item dropdown">

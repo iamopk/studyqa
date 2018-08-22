@@ -7,7 +7,11 @@
 
             @foreach($articles as $article)
                 <div class="card mb-5">
-                    <img class="card-img-top" src="{{$article->pic}}" alt="Card image cap">
+                    @if(file_exists("storage/".$article->pic))
+                        <img class="card-img-top" src="/storage/{{$article->pic}}">
+                    @else
+                        <img class="card-img-top" src="{{$article->pic}}">
+                    @endif
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted">{{$article->created_at->diffForHumans()}}</h6>
                         <a href="{{route('news.show', ['article'=>$article])}}">

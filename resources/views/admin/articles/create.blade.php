@@ -8,15 +8,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="titleFormControl">Заголовок</label>
-                    <input value="{{old('title')}}" type="text" name="title" class="form-control" id="titleFormControl" placeholder="Заголовок">
+                    <input value="{{old('title')}}" required type="text" name="title" class="form-control" id="titleFormControl" placeholder="Заголовок">
                 </div>
                 <div class="form-group">
                     <label for="picFormControl">Картинка</label>
-                    <input value="{{old('file')}}" type="file" name="file" class="form-control-file" id="picFormControl" accept="image/*">
+                    <input value="{{old('file')}}" required type="file" name="file" class="form-control-file" id="picFormControl" accept="image/*">
                 </div>
                 <div class="form-group">
                     <label for="bodyFormControl">Текст</label>
-                    <textarea class="form-control" name="body" id="bodyFormControl" rows="3">{{old('body')}}</textarea>
+                    <textarea class="form-control" required name="body" id="bodyFormControl" rows="3">{{old('body')}}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary mb-2">Создать</button>
             </form>

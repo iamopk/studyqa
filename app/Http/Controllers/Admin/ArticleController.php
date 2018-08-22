@@ -74,7 +74,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        dd('edit '.$id);
+        $article = Article::findOrFail($id);
+        return view('admin.articles.edit', ['article' => $article]);
     }
 
     /**
@@ -86,7 +87,34 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'file' => 'image|mimes:jpg,jpeg,png',
+            'body' => 'required',
+        ]);
+
+        $article = Article::findOrFail($id);
+
+        if ($request->title) {
+            $article->title = $request->title;
+        }
+
+        if ($request->body) {
+            $article->body = $request->body;
+        }
+
+        if ($request->file('file')){
+            $article->pic = $request->file('file')->store('images', 'public');
+        }
+
+        $article->update([
+            'title' => $article->title,
+            'pic' => $article->pic,
+            'body' => $article->body,
+        ]);
+
+        return redirect(route('admin.news'));
+
     }
 
     /**
@@ -97,6 +125,10 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        dd('delete '. $id);
+        $article = Article::findOrFail($id);
+
+        $article->delete();
+
+        return redirect(route('admin.news'));
     }
 }

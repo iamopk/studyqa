@@ -14,7 +14,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($articles as $article)
+                @forelse($articles as $article)
                     <tr>
                         <th scope="row">{{$article->id}}</th>
                         <td>{{$article->title}}</td>
@@ -28,7 +28,11 @@
                             <a class="btn btn-outline-danger btn-sm delete-article" href="{{route('admin.news.destroy', ['id' => $article->id])}}">Delete</a>
                         </td>
                     </tr>
-                @endforeach()
+                @empty
+                    <tr>
+                        <h1>Нет новостей</h1>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
 
