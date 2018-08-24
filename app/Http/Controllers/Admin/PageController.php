@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function edit($id)
     {
-        $page = Page::findOrFail(1);
+        $page = Page::query()->findOrFail(1);
         return view('admin.page', ['page' => $page]);
     }
 
@@ -21,7 +21,8 @@ class PageController extends Controller
             'text' => 'required',
         ]);
 
-        $page = Page::findOrFail($id);
+        /** @var Page $page */
+        $page = Page::query()->findOrFail($id);
 
         if ($request->title) {
             $page->title = $request->title;

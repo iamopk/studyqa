@@ -8,11 +8,6 @@ use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $articles = Article::query()->orderBy('id', 'desc')->paginate(15);
@@ -20,22 +15,11 @@ class ArticleController extends Controller
         return view('admin.articles.index', ['articles' => $articles]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.articles.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -46,7 +30,7 @@ class ArticleController extends Controller
 
         $path = $request->file('file')->store('images', 'public');
 
-        Article::create([
+        Article::query()->create([
             'title' => $request->title,
             'pic' => $path,
             'body' => $request->body,
@@ -55,36 +39,12 @@ class ArticleController extends Controller
         return redirect(route('admin.news'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::query()->findOrFail($id);
         return view('admin.articles.edit', ['article' => $article]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -93,7 +53,10 @@ class ArticleController extends Controller
             'body' => 'required',
         ]);
 
-        $article = Article::findOrFail($id);
+        /**
+         * @var $article Article
+         */
+        $article = Article::query()->findOrFail($id);
 
         if ($request->title) {
             $article->title = $request->title;
@@ -103,7 +66,7 @@ class ArticleController extends Controller
             $article->body = $request->body;
         }
 
-        if ($request->file('file')){
+        if ($request->file('file')) {
             $article->pic = $request->file('file')->store('images', 'public');
         }
 
@@ -114,18 +77,11 @@ class ArticleController extends Controller
         ]);
 
         return redirect(route('admin.news'));
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::query()->findOrFail($id);
 
         $article->delete();
 
