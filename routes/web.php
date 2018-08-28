@@ -24,7 +24,7 @@ Route::get('/news/{article}', 'ArticleController@show')->name('news.show');
 Route::group([
     'prefix' => config('admin.prefix'),
     'namespace' => config('admin.namespace'),
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'adminSide'],
 ], function (Router $router) {
     $router->get('/news', 'ArticleController@index')->name('admin.news');
     $router->get('/news/create', 'ArticleController@create')->name('admin.news.create');

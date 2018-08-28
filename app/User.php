@@ -37,4 +37,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getRoleName()
+    {
+        $role = 'user';
+        if ($this->role === self::ROLE_ADMIN) {
+            $role = 'admin';
+        } elseif ($this->role === self::ROLE_PUBLISHER) {
+            $role = 'publisher';
+        } elseif ($this->role === self::ROLE_MODERATOR) {
+            $role = 'moderator';
+        }
+        return $role;
+    }
 }
