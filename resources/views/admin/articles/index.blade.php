@@ -23,10 +23,12 @@
                         @else
                             <td><img width="100" src="{{$article->pic}}" /></td>
                         @endif
-                        <td>
-                            <a class="btn btn-primary btn-sm" href="{{route('admin.news.edit', ['id' => $article->id])}}">Edit</a>
-                            <a class="btn btn-outline-danger btn-sm delete-article" href="{{route('admin.news.destroy', ['id' => $article->id])}}">Delete</a>
-                        </td>
+                        @can('ArticleController')
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.news.edit', ['id' => $article->id])}}">Edit</a>
+                                <a class="btn btn-outline-danger btn-sm delete-article" href="{{route('admin.news.destroy', ['id' => $article->id])}}">Delete</a>
+                            </td>
+                        @endcan
                     </tr>
                 @empty
                     <tr>

@@ -29,5 +29,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin-side', function (User $user) {
             return $user->role !== User::ROLE_USER;
         });
+
+        Gate::define(
+            'ArticleController',
+            'App\Policies\ArticlePolicy@controller'
+        );
     }
 }

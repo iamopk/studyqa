@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $email
  * @property string $password
  * @property string $remember_token
+ * @property integer $role
  */
 class User extends Authenticatable
 {
