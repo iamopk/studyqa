@@ -10,12 +10,15 @@ class PageController extends Controller
 {
     public function edit($id)
     {
+        $this->authorize('edit', Page::class);
         $page = Page::query()->findOrFail(1);
         return view('admin.page', ['page' => $page]);
     }
 
     public function update(Request $request, $id)
     {
+        $this->authorize('edit', Page::class);
+
         $this->validate($request, [
             'title' => 'required|string|max:255',
             'text' => 'required',
