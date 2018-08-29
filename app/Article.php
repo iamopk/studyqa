@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  * @property string $pic
  * @property string $body
+ * @property integer $user_id
  */
 class Article extends Model
 {

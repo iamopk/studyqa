@@ -41,16 +41,15 @@ class ArticleController extends Controller
 
     public function edit($id)
     {
-        $this->authorize('ArticleController');
-
         $article = Article::query()->findOrFail($id);
+
+        $this->authorize('edit', $article);
+
         return view('admin.articles.edit', ['article' => $article]);
     }
 
     public function update(Request $request, $id)
     {
-        $this->authorize('ArticleController');
-
         $this->validate($request, [
             'title' => 'required|string|max:255',
             'file' => 'image|mimes:jpg,jpeg,png',
@@ -61,6 +60,8 @@ class ArticleController extends Controller
          * @var $article Article
          */
         $article = Article::query()->findOrFail($id);
+
+        $this->authorize('update', $article);
 
         if ($request->title) {
             $article->title = $request->title;
@@ -85,7 +86,7 @@ class ArticleController extends Controller
 
     public function destroy($id)
     {
-        $this->authorize('ArticleController');
+        $this->authorize('destroy');
 
         $article = Article::query()->findOrFail($id);
 
