@@ -24,7 +24,9 @@
                             <td><img width="100" src="{{$image->url}}" /></td>
                         @endif
                         <td>
-                            <a class="btn btn-outline-danger btn-sm delete-article" href="{{route('admin.images.destroy', ['id' => $image->id])}}">Delete</a>
+                            @can('destroy', \App\Image::class)
+                                <a class="btn btn-outline-danger btn-sm delete-article" href="{{route('admin.images.destroy', ['id' => $image->id])}}">Delete</a>
+                            @endcan
                         </td>
                     </tr>
                 @empty

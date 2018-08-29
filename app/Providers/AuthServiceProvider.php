@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Article;
+use App\Image;
 use App\Page;
 use App\Policies\ArticlePolicy;
+use App\Policies\ImagePolicy;
 use App\Policies\PagePolicy;
 use App\User;
 use Illuminate\Support\Facades\Gate;
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Article::class => ArticlePolicy::class,
         Page::class => PagePolicy::class,
+        Image::class => ImagePolicy::class,
     ];
 
     /**

@@ -65,7 +65,9 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('admin.images') }}">Картинки</a>
-                                <a class="dropdown-item" href="{{ route('admin.images.create') }}">Загрузить картинку</a>
+                                @can('create', \App\Image::class)
+                                    <a class="dropdown-item" href="{{ route('admin.images.create') }}">Загрузить картинку</a>
+                                @endcan
                             </div>
                         </li>
 

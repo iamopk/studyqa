@@ -17,11 +17,13 @@ class ImageController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Image::class);
         return view('admin.gallery.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Image::class);
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'file' => 'required|image|mimes:jpg,jpeg,png',
@@ -39,6 +41,8 @@ class ImageController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('destroy', Image::class);
+
         $image = Image::query()->findOrFail($id);
 
         $image->delete();
