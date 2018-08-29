@@ -17,11 +17,15 @@ class ArticleController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Article::class);
+
         return view('admin.articles.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Article::class);
+
         $this->validate($request, [
             'title' => 'required|string|max:255',
             'file' => 'required|image|mimes:jpg,jpeg,png',
@@ -34,6 +38,7 @@ class ArticleController extends Controller
             'title' => $request->title,
             'pic' => $path,
             'body' => $request->body,
+            'user_id' => \Auth::user()->id,
         ]);
 
         return redirect(route('admin.news'));
@@ -43,7 +48,7 @@ class ArticleController extends Controller
     {
         $article = Article::query()->findOrFail($id);
 
-        $this->authorize('edit', $article);
+        $this->authorize('edit', $article, Article::class);
 
         return view('admin.articles.edit', ['article' => $article]);
     }
@@ -61,7 +66,7 @@ class ArticleController extends Controller
          */
         $article = Article::query()->findOrFail($id);
 
-        $this->authorize('update', $article);
+        $this->authorize('edit', $article, Article::class);
 
         if ($request->title) {
             $article->title = $request->title;
@@ -86,7 +91,7 @@ class ArticleController extends Controller
 
     public function destroy($id)
     {
-        $this->authorize('destroy');
+        $this->authorize('destroy', Article::class);
 
         $article = Article::query()->findOrFail($id);
 

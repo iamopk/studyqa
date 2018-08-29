@@ -52,7 +52,9 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('admin.news') }}">Все новости</a>
-                                <a class="dropdown-item" href="{{ route('admin.news.create') }}">Создать новость</a>
+                                @can('create', \App\Article::class)
+                                    <a class="dropdown-item" href="{{ route('admin.news.create') }}">Создать новость</a>
+                                @endcan
                             </div>
                         </li>
 
