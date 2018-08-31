@@ -12,7 +12,7 @@ class ArticlePolicy
 
     public function edit(User $user, Article $article)
     {
-        return $article->user_id === $user->id ||
+        return (int) $article->user_id === $user->id ||
                in_array($user->role, [User::ROLE_ADMIN, User::ROLE_MODERATOR]);
     }
 
